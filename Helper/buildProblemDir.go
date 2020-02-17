@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/exec"
 	"runtime/debug"
 	"strings"
 	"syscall"
@@ -52,6 +51,7 @@ func build(p problem) {
 		}
 	}()
 
+    // windows用户注释这两行
 	mask := syscall.Umask(0)
 	defer syscall.Umask(mask)
 
@@ -63,24 +63,29 @@ func build(p problem) {
 
 	log.Printf("开始创建 %d %s 的文件夹...\n", p.ID, p.Title)
 
+	content, fc := getGraphql(p)
+	if fc == "" {
+		log.Panicf("查无Go语言写法")
+	}
+
 	// 利用 chrome 打开题目页面
-	go func() {
-		cmd := exec.Command("google-chrome", p.link())
-		_, err = cmd.Output()
-		if err != nil {
-			panic(err.Error())
-		}
-	}()
+	// go func() {
+	// 	cmd := exec.Command("google-chrome", p.link())
+	// 	_, err = cmd.Output()
+	// 	if err != nil {
+	// 		panic(err.Error())
+	// 	}
+	// }()
 
-	fc := getFunction(p.link())
+	// fc := getFunction(p.link())
 
-	fcName, para, ans, fc := parseFunction(fc)
+	fcName, para, ans, _ := parseFunction(fc)
 
 	creatGo(p, fc, ans)
 
 	creatGoTest(p, fcName, para, ans)
 
-	creatREADME(p)
+	creatREADME(p, content)
 
 	log.Printf("%d.%s 的文件夹，创建完毕。\n", p.ID, p.Title)
 }
@@ -144,10 +149,10 @@ func creatGoTest(p problem, fcName, para, ansType string) {
 
 	testFuncFormat := `
 func Test_%s(t *testing.T) {
-	ast := assert.New(t)
+	a := assert.New(t)
 
 	for _, tc := range tcs {
-		ast.Equal(tc.ans, %s(%s), "输入:%s", tc)
+		a.Equal(tc.ans, %s(%s), "输入:%s", tc)
 	}
 }`
 	tcPara := getTcPara(para)

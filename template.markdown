@@ -3,7 +3,7 @@
 [![LeetCode 排名](https://img.shields.io/badge/{{.Username}}-{{.Ranking}}-blue.svg)](https://leetcode.com/{{.Username}}/)
 [![codecov](https://codecov.io/gh/aQuaYi/LeetCode-in-Go/branch/master/graph/badge.svg)](https://codecov.io/gh/aQuaYi/LeetCode-in-Go)
 [![Build Status](https://www.travis-ci.org/aQuaYi/LeetCode-in-Go.svg?branch=master)](https://www.travis-ci.org/aQuaYi/LeetCode-in-Go)
- [![Go](https://img.shields.io/badge/Golang-1.12-blue.svg)](https://golang.google.cn)
+ [![Go](https://img.shields.io/badge/Go-1.13-blue.svg)](https://golang.google.cn)
 
 ## 进度
 
@@ -39,3 +39,13 @@
 - [Stack](./kit/Stack.go)
 - [TreeNode](./kit/TreeNode.go)
 - [Master](./kit/master.go)
+
+## 致谢
+
+感谢所有贡献者的辛苦付出
+
+<a href="https://github.com/aQuaYi/LeetCode-in-Go/graphs/contributors"><img src="https://opencollective.com/leetcode-in-go/contributors.svg?width=890&button=false"/></a>
+
+感谢 JetBrains
+
+[![GoLand](GoLand.png)]( https://www.jetbrains.com/?from=LeetCode-in-Go)
